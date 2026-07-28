@@ -1,0 +1,67 @@
+%Drivecycle
+Drive = readmatrix('UDDS.csv');
+
+%Vehicle Parameters
+Mv = 1630.665; %kg
+%Mass of driver
+Md = 80;
+%Gross vehicle mass
+GVM = Mv+Md;
+%Gravitational constant
+g = 9.81;
+%Gross vehicle weight
+GVW = GVM*g;
+
+%Vehicle Resistive
+Crf = 0.015;        %Coefficient of rolling resistance
+Fa = 3.8056;        %Frontal area 
+rho = 1.225;        %Air denisty
+Cd = 0.28;          %Drag coefficient
+Rw = 0.2032;        %Radius of the wheel
+
+%Transmission
+GR = 7.9377;
+Teff = 0.89;
+
+%Motor Paramaters
+K_T=0.195           %Nm/A
+K_EMF=0.238         %V/(rad/s)
+R_Arm=0.00567       %ohms
+Motor=readmatrix('Nissan Leaf Motor Efficiency.xls');
+Motor_Speed=Motor(:,1);
+Motor_Eff=Motor(:,2:16);
+Motor_Torque=Motor(:,17)
+Motor_Regen=readmatrix('Motor Regenerative Efficiency.csv');
+Motor_Regen_Speed=Motor_Regen(:,1);
+Motor_Regen_Eff=Motor_Regen(:,2:16);
+Motor_Regen_Torque=Motor_Regen(:,17);
+
+%Motor Controller Paramaters
+M_Controller=readmatrix('Nissan Leaf Motor Controller Efficiency.csv');
+M_Controller_Speed=M_Controller(:,1);
+M_Controller_Torque=M_Controller(:,17);
+M_Controller_Eff=M_Controller(:,2:16);
+
+M_C_Regen=readmatrix('Motor Controller Regenerative Efficiency.csv');
+M_C_Regen_Speed=M_C_Regen(:,1);
+M_C_Regen_Torque=M_C_Regen(:,17);
+M_C_Regen_Eff=M_C_Regen(:,2:16);
+
+%Battery
+%Cell Limitations (We define certain limitations for Ensuring Safety)
+Max_Regen_Current=33.1;  %A Cell Level
+Cell=readmatrix('Cell Data.csv'); %Terminal Voltage(Not OCV)
+Cell_Volt=Cell(:,2);
+Cell_SOC=Cell(:,3);
+
+%Battery Limitations
+Np=2;
+Ns=96;
+Max_Battery_Regen_Current=Max_Regen_Current*Np;   %A Pack Level
+Batt_Capacity= 66.2 %Ah
+Batt_Energy=24000; %Wh
+Ir=0.0023; %Interconnection Resistance
+
+%SOC Limitation
+LSOC=20;  %High
+HSOC=80;  %Low

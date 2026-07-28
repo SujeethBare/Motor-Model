@@ -1,0 +1,23 @@
+%Post Processing
+data = readmatrix('Nissan Leaf Motor Characteristics.csv');
+Motor_Speed1=data(:,1);
+Motor_Torque1=data(:,2);     %Peak_Torque
+Motor_ContTorque=data(:,3);  %Continous_Torque
+
+%Operating Points
+scatter(out.Motor_Speed.Data,abs(out.Motor_Regen_Torque.Data))
+xlabel('Motor Speed (RPM)')
+ylabel('Regen Torque (Nm)')
+title('Regen Torque vs Motor Speed (No Control Logic)')
+hold on
+plot(Motor_Speed1,Motor_Torque1)
+text(1000,max(Motor_Torque1),'Motor Peak Torque')
+plot(Motor_Speed1,Motor_ContTorque)
+text(1000,max(Motor_ContTorque1),'Motor Peak Torque')
+
+scatter(out.Motor_Speed_with_Cntrl_Logic.Data,abs(out.Motor_Torque_with_Cntrl_Logic.Data))
+xlabel('Motor Speed (RPM)')
+ylabel('Regen Torque (Nm)')
+title('Regen Torque vs Motor Speed (With Control Logic)')
+
+
