@@ -1,4 +1,4 @@
-# EV Traction Motor & Regenerative Braking Model
+# Traction Motor & Regenerative Braking Model
 
 MATLAB/Simulink model of an electric vehicle (Nissan Leaf class) traction motor in **motoring** and **regenerative braking** modes, used to estimate regen power and the vehicle's **range with and without regeneration** over the **UDDS** drive cycle.
 
